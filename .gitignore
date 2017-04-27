@@ -1,0 +1,10 @@
+.c9/
+.tmp/
+.publish/
+dist/
+typings/
+node_modules/
+npm-debug.log
+appsettings.yml
+src/app/appsettings.ts
+
