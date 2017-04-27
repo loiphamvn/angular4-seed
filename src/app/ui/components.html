@@ -1,0 +1,369 @@
+<div class="page">
+  <!-- Tab -->
+  <section class="panel panel-default">
+    <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Tabs</div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="section-header">
+            <h4>Simple Tabs</h4>
+          </div>
+          <tabset class="ui-tab">
+            <tab heading="Static title">Static content. Lorem ipsum dolor sit amet, <pre>{{tabs|json}}</pre></tab>
+            <tab *ngFor="let tab of tabs;" [heading]="tab.title" [active]="tab.active" [disabled]="tab.disabled">
+              {{tab.content}}
+            </tab>
+          </tabset>
+        </div>
+        <div class="col-md-6">
+          <div class="section-header">
+            <h4>Justified Tabs</h4>
+          </div>
+          <tabset justified="true" class="ui-tab">
+            <tab heading="Justified">Justified content</tab>
+            <tab heading="SJ">Short Labeled Justified content</tab>
+            <tab heading="Long Justified">Long Labeled Justified content</tab>
+          </tabset>
+        </div>
+      </div>
+      <div class="divider divider-lg"></div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="section-header">
+            <h4>Horizontal Tabs</h4>
+          </div>
+          <div class="ui-tab-container ui-tab-horizontal">
+            <tabset justified="false" class="ui-tab">
+              <tab heading="Home dolor">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, aspernatur, eum fugit officiis numquam iste aut illo quos pariatur Eligendi, veniam, accusamus.</p>
+              </tab>
+              <tab heading="Quod ea">
+                <p>Quod ea vel dolores earum veritatis quae sunt tempore odit molestias sit optio quaerat cupiditate iure repudiandae illum doloremque consectetur incidunt!</p>
+              </tab>
+              <tab heading="Earum sequi">
+                <p>Blanditiis tenetur harum distinctio voluptate asperiores non magnam delectus. Consequatur, deleniti rem magnam possimus necessitatibus iusto suscipit mollitia rerum.</p>
+              </tab>
+            </tabset>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="section-header">
+            <h4>Vertical Tabs</h4>
+          </div>
+          <div class="ui-tab-container ui-tab-vertical">
+            <tabset class="ui-tab">
+              <tab heading="Home dolor">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, aspernatur, eum fugit officiis numquam iste aut illo quos pariatur Eligendi, veniam, accusamus.</p>
+              </tab>
+              <tab heading="Quod ea">
+                <p>Quod ea vel dolores earum veritatis quae sunt tempore odit molestias sit optio quaerat cupiditate iure repudiandae illum doloremque consectetur incidunt!</p>
+              </tab>
+              <tab heading="Earum sequi">
+                <p>Blanditiis tenetur harum distinctio voluptate asperiores non magnam delectus. Consequatur, deleniti rem magnam possimus necessitatibus iusto suscipit mollitia rerum.</p>
+              </tab>
+            </tabset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end Tab -->
+  <!-- Loader -->
+  <div class="panel panel-default">
+    <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Loader</div>
+    <div class="panel-body">
+      <a href="" (click)="start()" class="btn btn-primary btn-w-md btn-gap">Start the loader </a>
+      <a href="" click="set()" class="btn btn-success btn-w-md btn-gap">Set to 30%</a>
+      <a href="" click="complete()" class="btn btn-danger btn-w-md btn-gap">Complete it</a>
+      <div class="callout callout-info">
+        The loading bar will show at the top of the page.
+      </div>
+    </div>
+  </div>
+  <!-- end Loader -->
+  <!-- Pagination -->
+  <section class="panel panel-default">
+    <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Pagination</div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div *ngFor="let item of items; let i = index;">
+            <div *ngIf="(i <= (toItem-1)) && (i >= (fromItem-1))">{{item}}</div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 page-num-info">
+          <div class="inline">
+            {{fromItem}}-{{toItem}} of {{ totalItems }} items
+            <select [ngModel]="limit" (ngModelChange)="perPageChanged($event)">
+              <option [value]="p" *ngFor="let p of perPage">{{p}}</option>
+            </select>
+            per page
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6  text-right pagination-container">
+          <pagination [totalItems]="totalItems" [maxSize]="5" [(ngModel)]="page" (pageChanged)="pageChanged($event)" class="pagination-sm"></pagination>
+        </div>
+        <div class="col-md-12 col-sm-12">
+          <pagination [totalItems]="totalItems" [maxSize]="10" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
+          <pagination [boundaryLinks]="true" [totalItems]="totalItems" [maxSize]="10" [(ngModel)]="page" class="pagination-sm" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+          <pagination [directionLinks]="false" [boundaryLinks]="true" [totalItems]="totalItems" [maxSize]="10" [(ngModel)]="page"></pagination>
+          <pagination [directionLinks]="false" [totalItems]="totalItems" [(ngModel)]="page" (numPages)="smallnumPages = $event"></pagination>
+          <pre>The selected page no: {{page}}/{{smallnumPages}}</pre>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Pagination long small</h4>
+          <pagination [totalItems]="totalItems" [(ngModel)]="page" (pageChanged)="pageChanged($event)" class="pagination-sm"></pagination>
+          <h4>Pagination default</h4>
+          <pagination [totalItems]="totalItems" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pagination>
+          <h4>Pager</h4>
+          <pager [totalItems]="totalItems" [(ngModel)]="page" (pageChanged)="pageChanged($event)"></pager>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end Pagination -->
+  <!-- Notfify -->
+  <section class="panel panel-default">
+    <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Notify</div>
+    <div class="panel-body">
+      <button class="btn btn-w-md btn-gap btn-info" (click)="notify('info')">info message</button>
+      <button class="btn btn-w-md btn-gap btn-success" (click)="notify('success')">success message</button>
+      <button class="btn btn-w-md btn-gap btn-warning" (click)="notify('warning')">warning message</button>
+      <button class="btn btn-w-md btn-gap btn-danger" (click)="notify('error')">error message</button>
+      <div class="callout callout-info">
+        <p>Notification will show in lower right corner.</p>
+      </div>
+    </div>
+  </section>
+  <!-- end Notify -->
+  <div class="row">
+    <div class="col-md-6">
+      <!-- Popover -->
+      <section class="panel panel-default">
+        <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Popover</div>
+        <div class="panel-body text-center">
+          <button popover-placement="top" popover-title="The Popover Title" popover="On the Top! Here' goes the popover content..." popover-append-to-body="true" class="btn btn-w-lg btn-danger btn-gap">Popover on Top</button>
+          <br>
+          <button popover-placement="right" popover-title="The Popover Title" popover="On the Right! Here' goes the popover content..." popover-append-to-body="true" class="btn btn-w-lg btn-warning btn-gap">Popover on Right</button>
+          <br>
+          <button popover-placement="bottom" popover-title="The Popover Title" popover="On the Bottom! Here' goes the popover content..." popover-append-to-body="true" class="btn btn-w-lg btn-info btn-gap">Popover on Bottom</button>
+          <br>
+          <button popover-placement="left" popover-title="The Popover Title" popover="On the Left! Here' goes the popover content..." popover-append-to-body="true" class="btn btn-w-lg btn-success btn-gap">Popover on Left</button>
+          <br>
+          <button popover="On mouse enter!" popover-trigger="mouseenter" class="btn btn-w-lg btn-primary btn-gap">Popover on Mouseenter</button>
+          <div class="divider"></div>
+          <input type="text" value="Popover on Click" popover="I appeared on focus! Click away and I'll vanish..." popover-trigger="focus" class="form-control">
+        </div>
+      </section>
+      <!-- Popover -->
+    </div>
+    <div class="col-md-6">
+      <!-- Tooltip -->
+      <section class="panel panel-default">
+        <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Tooltip</div>
+        <div class="panel-body text-center">
+          <button class="btn btn-w-lg btn-default btn-gap" tooltipPlacement="top" tooltip="On the Top!">Tooltip on Top</button>
+          <br>
+          <button class="btn btn-w-lg btn-primary btn-gap" tooltipPlacement="left" tooltip="On the Left!">Tooltip on Left</button>
+          <br>
+          <button class="btn btn-w-lg btn-success btn-gap" tooltipPlacement="right" tooltip="On the Right!">Tooltip on Right</button>
+          <br>
+          <button class="btn btn-w-lg btn-danger btn-gap" tooltipAnimation="false" tooltip="I don't fade.">Without Animation</button>
+          <br>
+          <button class="btn btn-w-lg btn-warning btn-gap" tooltipPopupDelay='1000' tooltip='Appears with delay'>Tooltip Delayed</button>
+          <br>
+          <button class="btn btn-w-lg btn-info btn-gap" tooltipPlacement="bottom" tooltip="On the Bottom!">Tooltip on Bottom</button>
+        </div>
+      </section>
+      <!-- end Tooltip -->
+    </div>
+  </div>
+  <!-- Accordion -->
+  <!--   <section class="panel panel-default">
+    <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Accordion or Collapse</div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="section-header">
+            <h4>Accordion</h4>
+          </div>
+          <accordion close-others="oneAtATime" class="ui-accordion">
+            <accordion-group heading="Static Header, initially expanded" is-open="status.isFirstOpen">
+              This content is straight in the template.
+            </accordion-group>
+            <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
+              {{group.content}}
+            </accordion-group>
+          </accordion>
+        </div>
+        <div class="col-md-6">
+          <div class="section-header">
+            <h4>Collapse</h4>
+          </div>
+          <accordion close-others="!oneAtATime" class="ui-accordion">
+            <accordion-group heading="Static Header, initially expanded" is-open="status.isFirstOpen1">
+              This content is straight in the template.
+            </accordion-group>
+            <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
+              {{group.content}}
+            </accordion-group>
+          </accordion>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  <!-- end Accordion -->
+  <!-- Progressbar -->
+  <section class="panel panel-default">
+    <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Progressbar</div>
+    <div class="panel-body">
+      <h3>Static Progressbar</h3>
+      <progressbar class="progressbar-sm progress-rounded" value="22" type="success"></progressbar>
+      <progressbar class="progressbar-sm progress-rounded" value="33" type="info"></progressbar>
+      <progressbar class="progressbar-sm progress-rounded" value="66" type="warning"></progressbar>
+      <progressbar class="progressbar-sm progress-rounded" value="88" type="danger"></progressbar>
+      <h3>Dynamic</h3>
+      <progressbar [max]="max" [value]="dynamic"><span style="color:white; white-space:nowrap;">{{dynamic}} / {{max}}</span>
+      </progressbar>
+      <small><em>No animation</em></small>
+      <progressbar [animate]="false" [value]="dynamic" type="success"><b>{{dynamic}}%</b></progressbar>
+      <small><em>Object (changes type based on value)</em></small>
+      <progressbar class="progress-striped active" [value]="dynamic" [type]="type">{{type}} <i *ngIf="showWarning">!!!
+  Watch out !!!</i></progressbar>
+      <button type="button" class="btn btn-sm btn-primary" (click)="random()">Randomize</button>
+    </div>
+  </section>
+  <!-- end Progressbar -->
+  <!-- Collapse -->
+  <section class="panel panel-default">
+    <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Collapse</div>
+    <div class="panel-body">
+      <button class="btn btn-primary" (click)="isCollapsed = !isCollapsed">Toggle collapse</button>
+      <div [collapse]="isCollapsed">
+        <div class="well well-lg">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+      </div>
+    </div>
+  </section>
+  <!-- end Collapse -->
+  <!-- Alert -->
+  <section class="panel panel-default">
+    <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Alerts</div>
+    <div class="panel-body">
+      <!-- <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert> -->
+      <button class='btn btn-primary' (click)="addAlert()">Add Alert</button>
+    </div>
+  </section>
+  <!-- end Alert -->
+  <!-- Panels -->
+  <section class="panel panel-default">
+    <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Panels</div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Panel title</h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              Panel content
+            </div>
+            <div class="panel-footer">Panel footer</div>
+          </div>
+          <div class="panel panel-dark">
+            <div class="panel-heading">
+              <h3 class="panel-title">Panel title</h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+          </div>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Panel title</h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">Panel title</h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+          </div>
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">Panel title</h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+          </div>
+          <div class="panel panel-warning">
+            <div class="panel-heading">
+              <h3 class="panel-title">Panel title</h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+          </div>
+          <div class="panel panel-danger">
+            <div class="panel-heading">
+              <h3 class="panel-title">Panel title</h3>
+            </div>
+            <div class="panel-body">
+              Panel content
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end Panels -->
+  <!-- end Callout -->
+  <!-- Well -->
+  <section class="panel panel-default">
+    <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Well</div>
+    <div class="panel-body">
+      <div class="well well-sm">Look, I'm in a small well!</div>
+      <div class="well">Look, I'm in a well!</div>
+      <div class="well well-lg">Look, I'm in a large well!</div>
+    </div>
+  </section>
+  <!-- end Well -->
+  <!-- Scrollable Box -->
+  <div class="panel panel-default">
+    <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Scrollable Box</div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading"><span class="glyphicon glyphicon-th"></span> Scrollable Box</div>
+            <div class="panel-body ui-map " data-slim-scroll data-scroll-height="200px">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, tenetur, repellat obcaecati unde esse doloribus accusamus exercitationem vitae corporis blanditiis aspernatur quibusdam porro rerum voluptatum quos eligendi necessitatibus enim! Maiores, doloribus, fuga, perspiciatis cupiditate aperiam repellendus natus nisi recusandae rerum optio consectetur nemo reprehenderit nesciunt molestiae at. Molestiae, nesciunt inventore dignissimos itaque exercitationem vero aliquam provident aperiam repudiandae nostrum. Ipsa, possimus, natus culpa magni rem iusto ut quisquam cupiditate aspernatur nemo sed aliquam quam illum illo quos dolor animi ipsum dolorem sunt beatae officia facere voluptatem omnis! Sapiente, illo voluptatibus amet omnis optio labore nesciunt porro facere praesentium laudantium molestiae voluptas eos incidunt quod nulla. Provident, debitis, odit qui ab facere adipisci laborum ea necessitatibus sapiente voluptatibus minima inventore veritatis unde nemo ipsa quisquam dolorum autem et minus repudiandae nostrum aliquam numquam aperiam similique vero delectus maiores non aliquid laboriosam eius impedit cum vel a corporis consequuntur natus earum suscipit. Repellat, laborum, cupiditate aperiam distinctio vero dolor est quibusdam sit rerum expedita tempore reiciendis quidem quisquam deserunt autem pariatur eos fugiat qui hic temporibus ullam dicta voluptatem sequi at iusto! Accusamus, iure, optio temporibus molestiae ab dolor blanditiis veritatis corporis eius reiciendis sed molestias obcaecati dolorem similique rerum illo excepturi.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-body ui-map " data-slim-scroll data-scroll-height="240px">
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, tenetur, repellat obcaecati unde esse doloribus accusamus exercitationem vitae corporis blanditiis aspernatur quibusdam porro rerum voluptatum quos eligendi necessitatibus enim! Maiores, doloribus, fuga, perspiciatis cupiditate aperiam repellendus natus nisi recusandae rerum optio consectetur nemo reprehenderit nesciunt molestiae at. Molestiae, nesciunt inventore dignissimos itaque exercitationem vero aliquam provident aperiam repudiandae nostrum. Ipsa, possimus, natus culpa magni rem iusto ut quisquam cupiditate aspernatur nemo sed aliquam quam illum illo quos dolor animi ipsum dolorem sunt beatae officia facere voluptatem omnis! Sapiente, illo voluptatibus amet omnis optio labore nesciunt porro facere praesentium laudantium molestiae voluptas eos incidunt quod nulla. Provident, debitis, odit qui ab facere adipisci laborum ea necessitatibus sapiente voluptatibus minima inventore veritatis unde nemo ipsa quisquam dolorum autem et minus repudiandae nostrum aliquam numquam aperiam similique vero delectus maiores non aliquid laboriosam eius impedit cum vel a corporis consequuntur natus earum suscipit. Repellat, laborum, cupiditate aperiam distinctio vero dolor est quibusdam sit rerum expedita tempore reiciendis quidem quisquam deserunt autem pariatur eos fugiat qui hic temporibus ullam dicta voluptatem sequi at iusto! Accusamus, iure, optio temporibus molestiae ab dolor blanditiis veritatis corporis eius reiciendis sed molestias obcaecati dolorem similique rerum illo excepturi.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end Scrollable Box -->
+</div>
